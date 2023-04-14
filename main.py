@@ -77,6 +77,7 @@ print(a.average_wfi_of_texts(questions))
 
 #print("average syntax tree height of questions corpus:")
 #print(a.average_syntax_tree_height_texts(questions))
+##
 
 
 
