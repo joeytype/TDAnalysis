@@ -58,8 +58,8 @@ def extract_csv_content(filename):
 
     return (speeches, questions)
 
-def calculate_ttr(array_of_content):
-    for elem in array_of_content:
+def calculate_average_ttr(array_of_texts):
+    for elem in array_of_texts:
         print(elem)
         pattern = r'http\S+'
         elem = re.sub(pattern, '', elem)
@@ -72,8 +72,8 @@ def calculate_ttr(array_of_content):
     print("average of the ttr calculation for all elements:")
     print(average_ttr)
 
-def calculate_mtld(array_of_content):
-    for elem in array_of_content:
+def calculate_average_mtld(array_of_texts):
+    for elem in array_of_texts:
         print(elem)
         pattern = r'http\S+'
         elem = re.sub(pattern, '', elem)
@@ -87,17 +87,73 @@ def calculate_mtld(array_of_content):
     print(average_mtld)
 
 def yule(text):
-    # split text into tokens
     tokens = re.findall(r'\b\w+\b', text.lower())
-    # count frequencies of each word
     freqs = Counter(tokens)
-    # count frequencies of frequencies
     freq_of_freqs = Counter(freqs.values())
-    # calculate yule's k
     n = len(tokens)
     sum_squared_fof = sum([i*i*f for i, f in freq_of_freqs.items()])
     k = 10000 * (sum_squared_fof - n) / (n*n)
     return k
+
+
+def calculate_wfi(text):
+    #i think this might be a totally fucked up way of doing this but wtvr
+    # most common words
+    common_words = ["the", "be", "to", "of", "and", "a", "in", "that", "have", "I",
+                    "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
+                    "this", "but", "his", "by", "from", "they", "we", "say", "her",
+                    "she", "or", "an", "will", "my", "one", "all", "would", "there",
+                    "their", "what", "so", "up", "out", "if", "about", "who", "get",
+                    "which", "go", "me"]
+
+    # text as list of words
+    words = text.split()
+    total_words = len(words)
+
+    # frequency of each word in the text
+    word_counts = {}
+    for word in words:
+        if word in word_counts:
+            word_counts[word] += 1
+        else:
+            word_counts[word] = 1
+
+    # sum of the frequencies of the 50 most common words
+    common_word_freq = 0
+    for word in common_words:
+        if word in word_counts:
+            common_word_freq += word_counts[word]
+
+    # calculate the WFI
+    wfi = common_word_freq / total_words
+    return wfi
+
+
+def get_syntax_tree_height(sentence):
+    words = nltk.word_tokenize(sentence)
+
+    parser = nltk.ChartParser(nltk.data.load('grammars/large_grammars/atis.cfg'))
+    trees = list(parser.parse(words))
+
+    max_height = 0
+    for tree in trees:
+        height = tree.height()
+        if height > max_height:
+            max_height = height
+
+    return max_height
+
+def get_avg_syntax_tree_height(text):
+    sentences = nltk.sent_tokenize(text)
+    averages = []
+
+    for sentence in sentences:
+        height = get_syntax_tree_height(sentence)
+        averages.append(height)
+
+    average = ((sum(averages))/(len(averages)))
+    return average
+
 
 (speeches, questions) = extract_csv_content("speechesBALDMAN.csv")
 sm_array = read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
