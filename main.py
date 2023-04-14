@@ -59,6 +59,7 @@ def extract_csv_content(filename):
     return (speeches, questions)
 
 def calculate_average_ttr(array_of_texts):
+    # takes an array of tweets or speehces or smth idk
     for elem in array_of_texts:
 
         print(elem)
@@ -74,6 +75,7 @@ def calculate_average_ttr(array_of_texts):
     print(average_ttr)
 
 def calculate_average_mtld(array_of_texts):
+    #takes an array of tweets or speehces or smth idk
     for elem in array_of_texts:
         print(elem)
         pattern = r'http\S+'
