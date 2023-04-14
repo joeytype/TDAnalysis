@@ -16,21 +16,21 @@ import analysers as a
 #also again my dail corpus only has speeches and questions so if urs has more u need to allow for that
 
 (speeches, questions) = a.extract_csv_content("speechesBALDMAN.csv")
-sm_array = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
+tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
 
 #ttr
 print("average ttr of tweets corpus:")
-print(a.calculate_average_ttr(sm_array))
+print(a.calculate_average_ttr(tweets))
 
 print("average ttr of speeches corpus:")
 print(a.calculate_average_ttr(speeches))
 
-print("average ttr of tweets corpus:")
+print("average ttr of questions corpus:")
 print(a.calculate_average_ttr(questions))
 
 #mtld
 print("average mtld of tweets corpus:")
-print(a.calculate_average_mtld(sm_array))
+print(a.calculate_average_mtld(tweets))
 
 print("average mtld of speeches corpus:")
 print(a.calculate_average_mtld(speeches))
@@ -40,7 +40,7 @@ print(a.calculate_average_mtld(questions))
 
 #sentence length
 print("average sentence length of tweets corpus:")
-print(a.average_sentence_length_texts(sm_array))
+print(a.average_sentence_length_texts(tweets))
 
 print("average sentence length of speeches corpus:")
 print(a.average_sentence_length_texts(speeches))
@@ -50,7 +50,7 @@ print(a.average_sentence_length_texts(questions))
 
 #yules k
 print("average yules k of tweets corpus:")
-print(a.average_yulesk_of_texts(sm_array))
+print(a.average_yulesk_of_texts(tweets))
 
 print("average yules k of speeches corpus:")
 print(a.average_yulesk_of_texts(speeches))
@@ -60,7 +60,7 @@ print(a.average_yulesk_of_texts(questions))
 
 #wfi
 print("average wfi of tweets corpus:")
-print(a.average_wfi_of_texts(sm_array))
+print(a.average_wfi_of_texts(tweets))
 
 print("average wfi of speeches corpus:")
 print(a.average_wfi_of_texts(speeches))
@@ -68,15 +68,15 @@ print(a.average_wfi_of_texts(speeches))
 print("average wfi of questions corpus:")
 print(a.average_wfi_of_texts(questions))
 
-#syntax tree height
-print("average syntax tree height of tweets corpus:")
-print(a.average_syntax_tree_height_texts(sm_array))
+#syntax tree height BROKEN RN LOL SORRY
+#print("average syntax tree height of tweets corpus:")
+#print(a.average_syntax_tree_height_texts(sm_array))
 
-print("average syntax tree height of speeches corpus:")
-print(a.average_syntax_tree_height_texts(speeches))
+#print("average syntax tree height of speeches corpus:")
+#print(a.average_syntax_tree_height_texts(speeches))
 
-print("average syntax tree height of questions corpus:")
-print(a.average_syntax_tree_height_texts(questions))
+#print("average syntax tree height of questions corpus:")
+#print(a.average_syntax_tree_height_texts(questions))
 
 
 

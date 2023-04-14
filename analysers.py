@@ -9,7 +9,7 @@ import csv
 from collections import Counter
 import array
 import nltk
-nltk.download('grammar')
+import stanza
 import re
 ttr_results = []
 mtld_results = []
@@ -174,21 +174,15 @@ def average_wfi_of_texts(array_of_texts):
     return average
 
 def get_syntax_tree_height(sentence):
-    # Tokenize the sentence into a list of words
-    words = nltk.word_tokenize(sentence)
+    #this is broken rn but idk why
+    nlp = stanza.Pipeline('en', processors='tokenize,mwt,pos,lemma,depparse')
 
-    # Use the NLTK parser to generate a syntax tree
-    grammar = nltk.parse.load_parser('grammar:english')
-    trees = list(grammar.parse(words))
+    doc = nlp(sentence)
+    tree = doc.sentences[0].syntax_tree
 
-    # Find the height of the tallest tree
-    max_height = 0
-    for tree in trees:
-        height = tree.height()
-        if height > max_height:
-            max_height = height
+    height = tree.height()
 
-    return max_height
+    return height
 
 def get_avg_syntax_tree_height(text):
     sentences = nltk.sent_tokenize(text)
