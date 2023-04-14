@@ -60,6 +60,7 @@ def extract_csv_content(filename):
 
 def calculate_average_ttr(array_of_texts):
     for elem in array_of_texts:
+
         print(elem)
         pattern = r'http\S+'
         elem = re.sub(pattern, '', elem)
