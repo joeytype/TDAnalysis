@@ -77,7 +77,7 @@ print(a.average_syntax_tree_height_texts(speeches))
 
 print("average syntax tree height of questions corpus:")
 print(a.average_syntax_tree_height_texts(questions))
-##
+###
 
 
 
