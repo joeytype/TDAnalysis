@@ -63,7 +63,7 @@ def calculate_average_ttr(array_of_texts):
     for elem in array_of_texts:
 
         print(elem)
-        pattern = r'http\S+'
+        pattern = r'\b(?:https?://|www\.|#|@)\S+\b'
         elem = re.sub(pattern, '', elem)
         ttr_result = ld.ttr(elem)
         ttr_results.append(ttr_result)
@@ -78,7 +78,7 @@ def calculate_average_mtld(array_of_texts):
     #takes an array of tweets or speehces or smth idk
     for elem in array_of_texts:
         print(elem)
-        pattern = r'http\S+'
+        pattern = r'\b(?:https?://|www\.|#|@)\S+\b'
         elem = re.sub(pattern, '', elem)
         mtld_result = ld.mtld(elem)
         mtld_results.append(mtld_result)
