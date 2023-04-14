@@ -68,15 +68,15 @@ print(a.average_wfi_of_texts(speeches))
 print("average wfi of questions corpus:")
 print(a.average_wfi_of_texts(questions))
 
-#syntax tree height BROKEN RN LOL SORRY
-#print("average syntax tree height of tweets corpus:")
-#print(a.average_syntax_tree_height_texts(sm_array))
+#syntax tree height BROKEN RN LOL SORRY IT ALWAYS RETURNS NONE OOPSIES
+print("average syntax tree height of tweets corpus:")
+print(a.average_syntax_tree_height_texts(tweets))
 
-#print("average syntax tree height of speeches corpus:")
-#print(a.average_syntax_tree_height_texts(speeches))
+print("average syntax tree height of speeches corpus:")
+print(a.average_syntax_tree_height_texts(speeches))
 
-#print("average syntax tree height of questions corpus:")
-#print(a.average_syntax_tree_height_texts(questions))
+print("average syntax tree height of questions corpus:")
+print(a.average_syntax_tree_height_texts(questions))
 ##
 
 

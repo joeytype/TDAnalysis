@@ -9,6 +9,7 @@ import csv
 from collections import Counter
 import array
 import nltk
+from nltk.tree import Tree
 import stanza
 import re
 ttr_results = []
@@ -175,31 +176,57 @@ def average_wfi_of_texts(array_of_texts):
 
 def get_syntax_tree_height(sentence):
     #this is broken rn but idk why
-    nlp = stanza.Pipeline('en', processors='tokenize,mwt,pos,lemma,depparse')
+    def get_syntax_tree_height(sentence):
+        nlp = stanza.Pipeline('en', processors='tokenize,mwt,pos,lemma,depparse')
+        doc = nlp(sentence)
 
-    doc = nlp(sentence)
-    tree = doc.sentences[0].syntax_tree
+        if not doc.sentences:
+            # No parse trees were returned for this sentence
+            return None
 
-    height = tree.height()
+        # Get the string representation of the syntax tree
+        tree_str = doc.sentences[0].syntax
 
-    return height
+        if not tree_str:
+            # The sentence had a parse tree, but it was empty
+            return None
+
+        # Parse the string representation into a Tree object
+        try:
+            tree = Tree.fromstring(tree_str)
+        except ValueError:
+            # The string representation was not a valid tree
+            return None
+
+        # Find the height of the tree
+        height = tree.height()
+
+        return height
 
 def get_avg_syntax_tree_height(text):
     sentences = nltk.sent_tokenize(text)
-    averages = []
+    heights = []
 
     for sentence in sentences:
         height = get_syntax_tree_height(sentence)
-        averages.append(height)
+        if height is not None:
+            heights.append(height)
 
-    average = ((sum(averages))/(len(averages)))
+    if len(heights) == 0:
+        return None
+
+    average = sum(heights) / len(heights)
     return average
 
 def average_syntax_tree_height_texts(array_of_texts):
     results = []
     for text in array_of_texts:
         result = get_avg_syntax_tree_height(text)
-        results.append(result)
+        if result is not None:
+            results.append(result)
+
+    if len(results) == 0:
+        return None
 
     average = ((sum(results)) / (len(results)))
     return average
