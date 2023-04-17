@@ -68,6 +68,26 @@ print(a.average_wfi_of_texts(speeches))
 print("average wfi of questions corpus:")
 print(a.average_wfi_of_texts(questions))
 
+#mlcu
+print("average mlcu of tweets corpus:")
+print(a.average_mlcu_texts(tweets))
+
+print("average mlcu of speeches corpus:")
+print(a.average_mlcu_texts(speeches))
+
+print("average mlcu of questions corpus:")
+print(a.average_mlcu_texts(questions))
+
+#average number of embedded clauses
+print("average number of embedded clauses of tweets corpus:")
+print(a.calculate_avg_embedded(tweets))
+
+print("average number of embedded clauses of speeches corpus:")
+print(a.calculate_avg_embedded(speeches))
+
+print("average number of embedded clauses of questions corpus:")
+print(a.calculate_avg_embedded(questions))
+
 #syntax tree height BROKEN RN LOL SORRY IT ALWAYS RETURNS NONE OOPSIES
 print("average syntax tree height of tweets corpus:")
 print(a.average_syntax_tree_height_texts(tweets))

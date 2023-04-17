@@ -11,6 +11,7 @@ import array
 import nltk
 from nltk.tree import Tree
 import stanza
+import spacy
 import re
 ttr_results = []
 mtld_results = []
@@ -222,6 +223,64 @@ def average_syntax_tree_height_texts(array_of_texts):
     results = []
     for text in array_of_texts:
         result = get_avg_syntax_tree_height(text)
+        if result is not None:
+            results.append(result)
+
+    if len(results) == 0:
+        return None
+
+    average = ((sum(results)) / (len(results)))
+    return average
+
+
+def calculate_mlcu(text):
+
+    sentences = nltk.sent_tokenize(text)
+    words = [nltk.word_tokenize(sentence) for sentence in sentences]
+
+    num_communication_units = sum([len(nltk.sent_tokenize(sentence)) for sentence in sentences])
+
+    num_words = sum([len(sentence) for sentence in words])
+
+    mlcu = num_words / num_communication_units
+
+    return mlcu
+
+def average_mlcu_texts(array_of_texts):
+    results = []
+    for text in array_of_texts:
+        result = calculate_mlcu(text)
+        if result is not None:
+            results.append(result)
+
+    if len(results) == 0:
+        return None
+
+    average = ((sum(results)) / (len(results)))
+    return average
+
+
+
+def calculate_avg_embedded_clauses(text):
+    #you might have to run python -m spacy download en_core_web_sm
+    #in your terminal before this will work
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    total_embedded_clauses = 0
+    total_sentences = 0
+    for sentence in doc.sents:
+        num_embedded_clauses = sum(1 for token in sentence if token.dep_ == "acl" or token.dep_ == "advcl")
+        total_embedded_clauses += num_embedded_clauses
+        total_sentences += 1
+    avg_embedded_clauses = total_embedded_clauses / total_sentences
+
+    return avg_embedded_clauses
+
+def calculate_avg_embedded(array_of_texts):
+    #this takes a whiiile im sorry
+    results = []
+    for text in array_of_texts:
+        result = calculate_avg_embedded_clauses(text)
         if result is not None:
             results.append(result)
 
