@@ -75,37 +75,51 @@ def extract_csv_content(filename):
 
     return (speeches, questions)
 
+import nltk
+
+def mean_ttr_of_text(text):
+    sentences = nltk.sent_tokenize(text)
+    tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
+    filtered_tokens = []
+    for sentence in tokens:
+        filtered_sentence = [token for token in sentence if not token.startswith(("http", "@", "#"))]
+        filtered_tokens.append(filtered_sentence)
+    ttrs = [len(set(token.lower() for token in sentence)) / len(sentence) for sentence in filtered_tokens if
+            len(sentence) > 0]
+    return sum(ttrs) / len(ttrs) if len(ttrs) > 0 else 0.0
+
 
 def results_ttr(array_of_texts):
     # takes an array of tweets or speehces or smth idk
-    for elem in array_of_texts:
+    ttrs = []
+    for text in array_of_texts:
+         ttrs.append(mean_ttr_of_text(text))
+    return ttrs
 
-       # print(elem)
-        pattern = r'\b(?:https?://|www\.|#|@)\S+\b'
-        elem = re.sub(pattern, '', elem)
-        ttr_result = ld.ttr(elem)
-        ttr_results.append(ttr_result)
-       # print("ttr:")
-        #print(ttr_result)
 
-    return ttr_results
-  #  print("average of the ttr calculation for all elements:")
-  #  print(average_ttr)
+def calculate_mtld(text):
+
+    words = nltk.word_tokenize(text)
+
+    words = [word for word in words if not (word.startswith("http") or word.startswith("@") or word.startswith("#"))]
+
+    mtld_value = ld.mtld(words)
+
+    return mtld_value
+
 
 def results_mtld(array_of_texts):
     #takes an array of tweets or speehces or smth idk
     for elem in array_of_texts:
        # print(elem)
-        pattern = r'\b(?:https?://|www\.|#|@)\S+\b'
-        elem = re.sub(pattern, '', elem)
-        mtld_result = ld.mtld(elem)
+        mtld_result = calculate_mtld(elem)
         mtld_results.append(mtld_result)
        # print("mtld:")
        # print(mtld_result)
 
     return mtld_results
-   # print("average of the mtld calculation for all elements:")
-   # print(average_mtld)s
+
+
 
 def yule(text):
     tokens = re.findall(r'\b\w+\b', text.lower())
