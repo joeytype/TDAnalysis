@@ -18,6 +18,8 @@ import analysers as a
 (speeches, questions) = a.extract_csv_content("speechesBALDMAN.csv")
 tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
 
+###lexical complexity
+print("**MEASURES OF LEXICAL COMPLEXITY/DIVERSITY**")
 #ttr
 print("average ttr of tweets corpus:")
 print(a.calculate_average_ttr(tweets))
@@ -38,16 +40,6 @@ print(a.calculate_average_mtld(speeches))
 print("average mtld of questions corpus:")
 print(a.calculate_average_mtld(questions))
 
-#sentence length
-print("average sentence length of tweets corpus:")
-print(a.average_sentence_length_texts(tweets))
-
-print("average sentence length of speeches corpus:")
-print(a.average_sentence_length_texts(speeches))
-
-print("average sentence length of questions corpus:")
-print(a.average_sentence_length_texts(questions))
-
 #yules k
 print("average yules k of tweets corpus:")
 print(a.average_yulesk_of_texts(tweets))
@@ -67,6 +59,19 @@ print(a.average_wfi_of_texts(speeches))
 
 print("average wfi of questions corpus:")
 print(a.average_wfi_of_texts(questions))
+
+##structural complexity
+print("***MEASURES OF STRUCTURAL COMPLEXITY***")
+
+#sentence length
+print("average sentence length of tweets corpus:")
+print(a.average_sentence_length_texts(tweets))
+
+print("average sentence length of speeches corpus:")
+print(a.average_sentence_length_texts(speeches))
+
+print("average sentence length of questions corpus:")
+print(a.average_sentence_length_texts(questions))
 
 #mlcu
 print("average mlcu of tweets corpus:")
