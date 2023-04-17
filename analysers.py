@@ -114,8 +114,6 @@ def results_mtld(array_of_texts):
        # print(elem)
         mtld_result = calculate_mtld(elem)
         mtld_results.append(mtld_result)
-       # print("mtld:")
-       # print(mtld_result)
 
     return mtld_results
 
