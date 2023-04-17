@@ -1,13 +1,7 @@
 from lexical_diversity import lex_div as ld
-import cophi as cophi
-import cophi_toolbox as cophi_toolbox
-import csvreader as csvreader
-import tsvtools as tsvtools
-import stanfordnlp as stanfordnlp
-import pycorenlp as pycorenlp
 import csv
 from collections import Counter
-import array
+import numpy as np
 import nltk
 from nltk.tree import Tree
 import stanza
@@ -55,15 +49,15 @@ def average_sentence_length(text):
 
     return avg_sentence_length
 
-def average_sentence_length_texts(texts):
+def results_sentence_length_texts(texts):
     #yesss excellent naming going on here but like you can pass all the speeches or all the tweets or smth into this
     #and it will give you the average sentence length in all the tweets or all the speeches or wtvr
     lengths = []
     for text in texts:
        length = average_sentence_length(text)
        lengths.append(length)
-    average_sentence_length_overall = (sum(lengths))/(len(lengths))
-    return average_sentence_length_overall
+    return lengths
+
 
 def extract_csv_content(filename):
     #this is like made for the format my dail csv is in so u might need to change the column numberss based on urs
@@ -81,7 +75,8 @@ def extract_csv_content(filename):
 
     return (speeches, questions)
 
-def calculate_average_ttr(array_of_texts):
+
+def results_ttr(array_of_texts):
     # takes an array of tweets or speehces or smth idk
     for elem in array_of_texts:
 
@@ -93,12 +88,11 @@ def calculate_average_ttr(array_of_texts):
        # print("ttr:")
         #print(ttr_result)
 
-    average_ttr = (sum((ttr_results)) / (len(ttr_results)))
-    return average_ttr
+    return ttr_results
   #  print("average of the ttr calculation for all elements:")
   #  print(average_ttr)
 
-def calculate_average_mtld(array_of_texts):
+def results_mtld(array_of_texts):
     #takes an array of tweets or speehces or smth idk
     for elem in array_of_texts:
        # print(elem)
@@ -109,10 +103,9 @@ def calculate_average_mtld(array_of_texts):
        # print("mtld:")
        # print(mtld_result)
 
-    average_mtld = (sum((mtld_results)) / (len(mtld_results)))
-    return average_mtld
+    return mtld_results
    # print("average of the mtld calculation for all elements:")
-   # print(average_mtld)
+   # print(average_mtld)s
 
 def yule(text):
     tokens = re.findall(r'\b\w+\b', text.lower())
@@ -123,14 +116,13 @@ def yule(text):
     k = 10000 * (sum_squared_fof - n) / (n*n)
     return k
 
-def average_yulesk_of_texts(array_of_texts):
+def results_yulesk_of_texts(array_of_texts):
     yulesk_values =[]
     for text in array_of_texts:
         yulesk = yule(text)
         yulesk_values.append(yulesk)
 
-    average = ((sum(yulesk_values)) / (len(yulesk_values)))
-    return average
+    return yulesk_values
 
 
 
@@ -166,14 +158,13 @@ def calculate_wfi(text):
     wfi = common_word_freq / total_words
     return wfi
 
-def average_wfi_of_texts(array_of_texts):
+def results_wfi_of_texts(array_of_texts):
     wfi_values =[]
     for text in array_of_texts:
         wfi = calculate_wfi(text)
         wfi_values.append(wfi)
 
-    average = ((sum(wfi_values)) / (len(wfi_values)))
-    return average
+    return wfi_values
 
 def get_syntax_tree_height(sentence):
     #this is broken rn but idk why
@@ -219,7 +210,7 @@ def get_avg_syntax_tree_height(text):
     average = sum(heights) / len(heights)
     return average
 
-def average_syntax_tree_height_texts(array_of_texts):
+def results_syntax_tree_height_texts(array_of_texts):
     results = []
     for text in array_of_texts:
         result = get_avg_syntax_tree_height(text)
@@ -229,8 +220,7 @@ def average_syntax_tree_height_texts(array_of_texts):
     if len(results) == 0:
         return None
 
-    average = ((sum(results)) / (len(results)))
-    return average
+    return results
 
 
 def calculate_mlcu(text):
@@ -246,7 +236,7 @@ def calculate_mlcu(text):
 
     return mlcu
 
-def average_mlcu_texts(array_of_texts):
+def results_mlcu_texts(array_of_texts):
     results = []
     for text in array_of_texts:
         result = calculate_mlcu(text)
@@ -256,9 +246,7 @@ def average_mlcu_texts(array_of_texts):
     if len(results) == 0:
         return None
 
-    average = ((sum(results)) / (len(results)))
-    return average
-
+    return results
 
 
 def calculate_avg_embedded_clauses(text):
@@ -276,7 +264,7 @@ def calculate_avg_embedded_clauses(text):
 
     return avg_embedded_clauses
 
-def calculate_avg_embedded(array_of_texts):
+def get_results_embedded(array_of_texts):
     #this takes a whiiile im sorry
     results = []
     for text in array_of_texts:
@@ -287,5 +275,18 @@ def calculate_avg_embedded(array_of_texts):
     if len(results) == 0:
         return None
 
-    average = ((sum(results)) / (len(results)))
-    return average
+    return results
+
+
+def stats_of_results_array(arr):
+    minimum = np.min(arr)
+    maximum = np.max(arr)
+    mean = np.mean(arr)
+    median = np.median(arr)
+    std_dev = np.std(arr)
+
+    print("Minimum: ", minimum)
+    print("Maximum: ", maximum)
+    print("Mean: ", mean)
+    print("Median: ", median)
+    print("Standard deviation: ", std_dev)

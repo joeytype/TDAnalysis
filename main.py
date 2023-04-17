@@ -18,90 +18,103 @@ import analysers as a
 (speeches, questions) = a.extract_csv_content("speechesBALDMAN.csv")
 tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
 
+print("These are calculated using the average for each entry in each corpus. For example the maximum sentence \n length is the maximum AVERAGE sentence length of an entry in that corpus")
 ###lexical complexity
 print("**MEASURES OF LEXICAL COMPLEXITY/DIVERSITY**")
 #ttr
-print("average ttr of tweets corpus:")
-print(a.calculate_average_ttr(tweets))
 
-print("average ttr of speeches corpus:")
-print(a.calculate_average_ttr(speeches))
-
-print("average ttr of questions corpus:")
-print(a.calculate_average_ttr(questions))
-
+print("\n")
+print("TTR tweets corpus:")
+print(a.stats_of_results_array(a.results_ttr(tweets)))
+print("\n")
+print("TTR speeches corpus:")
+print(a.stats_of_results_array(a.results_ttr(speeches)))
+print("\n")
+print("TTR questions corpus:")
+print(a.stats_of_results_array(a.results_ttr(questions)))
+print("\n")
 #mtld
-print("average mtld of tweets corpus:")
-print(a.calculate_average_mtld(tweets))
 
-print("average mtld of speeches corpus:")
-print(a.calculate_average_mtld(speeches))
-
-print("average mtld of questions corpus:")
-print(a.calculate_average_mtld(questions))
+print("MTLD tweets corpus:")
+print(a.stats_of_results_array(a.results_mtld(tweets)))
+print("\n")
+print("MTLD speeches corpus:")
+print(a.stats_of_results_array(a.results_mtld(speeches)))
+print("\n")
+print("MTLD questions corpus:")
+print(a.stats_of_results_array(a.results_mtld(questions)))
+print("\n")
 
 #yules k
-print("average yules k of tweets corpus:")
-print(a.average_yulesk_of_texts(tweets))
-
-print("average yules k of speeches corpus:")
-print(a.average_yulesk_of_texts(speeches))
-
-print("average yules k of questions corpus:")
-print(a.average_yulesk_of_texts(questions))
+print("Yules K tweets corpus:")
+print(a.stats_of_results_array(a.results_yulesk_of_texts(tweets)))
+print("\n")
+print("Yules K speeches corpus:")
+print(a.stats_of_results_array(a.results_yulesk_of_texts(speeches)))
+print("\n")
+print("Yules K questions corpus:")
+print(a.stats_of_results_array(a.results_yulesk_of_texts(questions)))
+print("\n")
 
 #wfi
-print("average wfi of tweets corpus:")
-print(a.average_wfi_of_texts(tweets))
-
-print("average wfi of speeches corpus:")
-print(a.average_wfi_of_texts(speeches))
-
-print("average wfi of questions corpus:")
-print(a.average_wfi_of_texts(questions))
+print("WFI tweets corpus:")
+print(a.stats_of_results_array(a.results_wfi_of_texts(tweets)))
+print("\n")
+print("WFI speeches corpus:")
+print(a.stats_of_results_array(a.results_wfi_of_texts(speeches)))
+print("\n")
+print("WFI of questions corpus:")
+print(a.stats_of_results_array(a.results_wfi_of_texts(questions)))
+print("\n")
 
 ##structural complexity
 print("***MEASURES OF STRUCTURAL COMPLEXITY***")
-
+print("\n")
 #sentence length
-print("average sentence length of tweets corpus:")
-print(a.average_sentence_length_texts(tweets))
+print("sentence length tweets corpus:")
+print(a.stats_of_results_array(a.results_sentence_length_texts(tweets)))
+print("\n")
+print("sentence length speeches corpus:")
+print(a.stats_of_results_array(a.results_sentence_length_texts(speeches)))
+print("\n")
+print("sentence length questions corpus:")
+print(a.stats_of_results_array(a.results_sentence_length_texts(questions)))
+print("\n")
 
-print("average sentence length of speeches corpus:")
-print(a.average_sentence_length_texts(speeches))
-
-print("average sentence length of questions corpus:")
-print(a.average_sentence_length_texts(questions))
 
 #mlcu
-print("average mlcu of tweets corpus:")
-print(a.average_mlcu_texts(tweets))
-
-print("average mlcu of speeches corpus:")
-print(a.average_mlcu_texts(speeches))
-
-print("average mlcu of questions corpus:")
-print(a.average_mlcu_texts(questions))
+print("MLCU tweets corpus:")
+print(a.stats_of_results_array(a.results_mlcu_texts(tweets)))
+print("\n")
+print("MLCU speeches corpus:")
+print(a.stats_of_results_array(a.results_mlcu_texts(speeches)))
+print("\n")
+print("MLCU questions corpus:")
+print(a.stats_of_results_array(a.results_mlcu_texts(questions)))
+print("\n")
 
 #average number of embedded clauses
-print("average number of embedded clauses of tweets corpus:")
-print(a.calculate_avg_embedded(tweets))
-
-print("average number of embedded clauses of speeches corpus:")
-print(a.calculate_avg_embedded(speeches))
-
-print("average number of embedded clauses of questions corpus:")
-print(a.calculate_avg_embedded(questions))
+print("embedded clauses tweets corpus:")
+print(a.stats_of_results_array(a.get_results_embedded(tweets)))
+print("\n")
+print("embedded clauses speeches corpus:")
+print(a.stats_of_results_array(a.get_results_embedded(speeches)))
+print("\n")
+print("embedded clauses questions corpus:")
+print(a.stats_of_results_array(a.get_results_embedded(questions)))
+print("\n")
 
 #syntax tree height BROKEN RN LOL SORRY IT ALWAYS RETURNS NONE OOPSIES
-print("average syntax tree height of tweets corpus:")
-print(a.average_syntax_tree_height_texts(tweets))
+print("syntax tree height tweets corpus:")
+print(a.stats_of_results_array(a.results_syntax_tree_height_texts(tweets)))
+print("\n")
+print("syntax tree height speeches corpus:")
+print(a.stats_of_results_array(a.results_syntax_tree_height_texts(speeches)))
+print("\n")
+print("syntax tree height questions corpus:")
+print(a.stats_of_results_array(a.results_syntax_tree_height_texts(questions)))
+print("\n")
 
-print("average syntax tree height of speeches corpus:")
-print(a.average_syntax_tree_height_texts(speeches))
-
-print("average syntax tree height of questions corpus:")
-print(a.average_syntax_tree_height_texts(questions))
 ###
 
 
