@@ -7,10 +7,9 @@ def kruskal_wallis_test(corpus1, corpus2):
     """
     h_statistic, p_value = stats.kruskal(corpus1, corpus2)
 
-    # Print the results
     print("Kruskal-Wallis test results:")
-    print(f"H-statistic: {h_statistic:.4f}")
-    print(f"p-value: {p_value:.4f}")
+    print(f"H-statistic: {h_statistic}")
+    print(f"p-value: {p_value}")
 
     if p_value < 0.05:
         print("There is a statistically significant difference between the two samples at the 0.05 level.")
