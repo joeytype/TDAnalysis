@@ -16,6 +16,8 @@ import analysers as a
 #also again my dail corpus only has speeches and questions so if urs has more u need to allow for that
 
 (speeches, questions) = a.extract_csv_content("speechesBALDMAN.csv")
+dail_utterances = speeches.append(questions)
+
 tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
 
 print("These are calculated using the average for each entry in each corpus. For example the maximum sentence \n length is the maximum AVERAGE sentence length of an entry in that corpus")
@@ -33,6 +35,9 @@ print("\n")
 print("TTR questions corpus:")
 print(a.stats_of_results_array(a.results_ttr(questions)))
 print("\n")
+print("TTR dail as a whole:")
+print(a.stats_of_results_array(a.results_ttr(dail_utterances)))
+print("\n")
 #mtld
 
 print("MTLD tweets corpus:")
@@ -43,6 +48,9 @@ print(a.stats_of_results_array(a.results_mtld(speeches)))
 print("\n")
 print("MTLD questions corpus:")
 print(a.stats_of_results_array(a.results_mtld(questions)))
+print("\n")
+print("MTLD dail as a whole:")
+print(a.stats_of_results_array(a.results_mtld(dail_utterances)))
 print("\n")
 
 #yules k
@@ -55,6 +63,9 @@ print("\n")
 print("Yules K questions corpus:")
 print(a.stats_of_results_array(a.results_yulesk_of_texts(questions)))
 print("\n")
+print("Yules K dail as a whole:")
+print(a.stats_of_results_array(a.results_yulesk_of_texts(dail_utterances)))
+print("\n")
 
 #wfi
 print("WFI tweets corpus:")
@@ -66,7 +77,9 @@ print("\n")
 print("WFI of questions corpus:")
 print(a.stats_of_results_array(a.results_wfi_of_texts(questions)))
 print("\n")
-
+print("WFI dail as a whole:")
+print(a.stats_of_results_array(a.results_wfi_of_texts(dail_utterances)))
+print("\n")
 ##structural complexity
 print("***MEASURES OF STRUCTURAL COMPLEXITY***")
 print("\n")
@@ -80,7 +93,9 @@ print("\n")
 print("sentence length questions corpus:")
 print(a.stats_of_results_array(a.results_sentence_length_texts(questions)))
 print("\n")
-
+print("sentence length dail as a whole:")
+print(a.stats_of_results_array(a.results_sentence_length_texts(dail_utterances)))
+print("\n")
 
 #mlcu
 print("MLCU tweets corpus:")
@@ -91,6 +106,9 @@ print(a.stats_of_results_array(a.results_mlcu_texts(speeches)))
 print("\n")
 print("MLCU questions corpus:")
 print(a.stats_of_results_array(a.results_mlcu_texts(questions)))
+print("\n")
+print("MLCU dail as a whole:")
+print(a.stats_of_results_array(a.results_mlcu_texts(dail_utterances)))
 print("\n")
 
 #average number of embedded clauses
@@ -103,6 +121,10 @@ print("\n")
 print("embedded clauses questions corpus:")
 print(a.stats_of_results_array(a.get_results_embedded(questions)))
 print("\n")
+print("embedded clauses dail as a whole:")
+print(a.stats_of_results_array(a.get_results_embedded(dail_utterances)))
+print("\n")
+
 
 #syntax tree height BROKEN RN LOL SORRY IT ALWAYS RETURNS NONE OOPSIES
 print("syntax tree height tweets corpus:")
@@ -114,7 +136,9 @@ print("\n")
 print("syntax tree height questions corpus:")
 print(a.stats_of_results_array(a.results_syntax_tree_height_texts(questions)))
 print("\n")
-
+print("syntax tree height dail as a whole:")
+print(a.stats_of_results_array(a.results_syntax_tree_height_texts(dail_utterances)))
+print("\n")
 ###
 
 
