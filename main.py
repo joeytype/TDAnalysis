@@ -5,7 +5,7 @@ import stats as s
 #also again my dail corpus only has speeches and questions so if urs has more u need to allow for that
 
 (speeches, questions) = a.extract_csv_content("speechesBALDMAN.csv")
-dail_utterances = speeches.append(questions)
+dail_utterances = speeches + questions
 tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
 
 choice = input("Input 1 to get your measure results, 2 to get your stat test results")
