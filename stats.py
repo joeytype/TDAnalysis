@@ -35,15 +35,23 @@ def mann_whitney_u(corpus1, corpus2):
         print("There is no significant difference between the two samples.")
 
 
-def t_test(mean1, mean2):
-    # Define the sample sizes
-    n1 = n2 = 30
 
-    # Define the sample standard deviations
-    sd1 = sd2 = 1.0
+def t_test(values1, values2):
+    #this now takes arrays like the other ones hehe
+    # Calculate the sample means
+    mean1 = sum(values1) / len(values1)
+    mean2 = sum(values2) / len(values2)
+
+    # Define the sample sizes
+    n1 = len(values1)
+    n2 = len(values2)
+
+    # Calculate the sample standard deviations
+    sd1 = stats.tstd(values1)
+    sd2 = stats.tstd(values2)
 
     # Calculate the t-statistic and p-value
-    t_statistic, p_value = stats.ttest_ind([mean1] * n1, [mean2] * n2)
+    t_statistic, p_value = stats.ttest_ind_from_stats(mean1, sd1, n1, mean2, sd2, n2)
 
     # Print the results
     print("T-test results:")
@@ -53,4 +61,3 @@ def t_test(mean1, mean2):
         print("The difference in means is statistically significant.")
     else:
         print("The difference in means is not statistically significant.")
-
