@@ -3,7 +3,7 @@ import stats as s
 
 #this literally just prints all the results lol sorry if its messy
 #also again my dail corpus only has speeches and questions so if urs has more u need to allow for that
-
+#
 (speeches, questions) = a.extract_csv_content("speechesBALDMAN.csv")
 dail_utterances = speeches + questions
 tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
