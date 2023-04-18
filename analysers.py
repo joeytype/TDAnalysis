@@ -7,6 +7,7 @@ from nltk.tree import Tree
 import stanza
 import spacy
 import re
+from lexicalrichness import LexicalRichness
 ttr_results = []
 mtld_results = []
 
@@ -119,13 +120,16 @@ def results_mtld(array_of_texts):
 
 
 def yule(text):
-    tokens = re.findall(r'\b(?![@#]|http)\w+\b', text.lower())
-    freqs = Counter(tokens)
-    freq_of_freqs = Counter(freqs.values())
-    n = len(tokens)
-    sum_squared_fof = sum([i * i * f for i, f in freq_of_freqs.items()])
-    k = 10000 * (sum_squared_fof - n) / (n * n)
-    return k
+    # tokens = re.findall(r'\b(?![@#]|http)\w+\b', text.lower())
+    # freqs = Counter(tokens)
+    # freq_of_freqs = Counter(freqs.values())
+    # n = len(tokens)
+    # sum_squared_fof = sum([i * i * f for i, f in freq_of_freqs.items()])
+    # k = 10000 * (sum_squared_fof - n) / (n * n)
+    # return k
+    filtered_text = re.sub(r'\b[@#]\w+\b|\bhttps?\S+\b', '', text)
+    lex = LexicalRichness(filtered_text)
+    return lex.yulek
 
 def results_yulesk_of_texts(array_of_texts):
     yulesk_values =[]
