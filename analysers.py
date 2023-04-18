@@ -119,12 +119,12 @@ def results_mtld(array_of_texts):
 
 
 def yule(text):
-    tokens = re.findall(r'\b\w+\b', text.lower())
+    tokens = re.findall(r'\b(?![@#]|http)\w+\b', text.lower())
     freqs = Counter(tokens)
     freq_of_freqs = Counter(freqs.values())
     n = len(tokens)
-    sum_squared_fof = sum([i*i*f for i, f in freq_of_freqs.items()])
-    k = 10000 * (sum_squared_fof - n) / (n*n)
+    sum_squared_fof = sum([i * i * f for i, f in freq_of_freqs.items()])
+    k = 10000 * (sum_squared_fof - n) / (n * n)
     return k
 
 def results_yulesk_of_texts(array_of_texts):
