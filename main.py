@@ -190,8 +190,8 @@ else:
     print("\n Yule's K")
     s.mann_whitney_u(dail_yulesks, twitter_yulesks)
 
-    print("\n WFI")
-    s.mann_whitney_u(dail_wfis, twitter_wfis)
+    # print("\n WFI")
+    # s.mann_whitney_u(dail_wfis, twitter_wfis)
 
     print("\n Sentence Lengths")
     s.mann_whitney_u(dail_sentencelengths, twitter_sentencelengths)
@@ -213,8 +213,8 @@ else:
     print("\n Yule's K")
     s.t_test(dail_yulesks, twitter_yulesks)
 
-    print("\n WFI")
-    s.t_test(dail_wfis, twitter_wfis)
+    # print("\n WFI")
+    # s.t_test(dail_wfis, twitter_wfis)
 
     print("\n Sentence Lengths")
     s.t_test(dail_sentencelengths, twitter_sentencelengths)
