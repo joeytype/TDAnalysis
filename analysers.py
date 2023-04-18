@@ -4,6 +4,7 @@ from collections import Counter
 import numpy as np
 import nltk
 from nltk.tree import Tree
+nltk.download('averaged_perceptron_tagger')
 import stanza
 import spacy
 import re
@@ -235,15 +236,37 @@ def results_syntax_tree_height_texts(array_of_texts):
 
 
 def calculate_mlcu(text):
-
+    # Tokenize text into sentences
     sentences = nltk.sent_tokenize(text)
-    words = [nltk.word_tokenize(sentence) for sentence in sentences]
 
-    num_communication_units = sum([len(nltk.sent_tokenize(sentence)) for sentence in sentences])
+    # Iterate over sentences and tokenize into clause units
+    clause_units = []
+    for sentence in sentences:
+        # Tokenize sentence into words
+        words = nltk.word_tokenize(sentence)
 
-    num_words = sum([len(sentence) for sentence in words])
+        # Iterate over words and group into clause units
+        clause_unit = []
+        for i, word in enumerate(words):
+            if i == 0:
+                clause_unit.append(word)
+            elif nltk.pos_tag([word])[0][1] in [',', ':', 'CC', 'IN']:
+                # Add punctuation and conjunctions to previous clause unit
+                clause_unit.append(word)
+            else:
+                # Start a new clause unit
+                clause_units.append(clause_unit)
+                clause_unit = [word]
 
-    mlcu = num_words / num_communication_units
+        # Add the last clause unit in the sentence
+        clause_units.append(clause_unit)
+
+    # Calculate the total number of clause units and the total number of words
+    num_clause_units = len(clause_units)
+    num_words = sum(len(clause_unit) for clause_unit in clause_units)
+
+    # Calculate the mean length of clause unit
+    mlcu = num_words / num_clause_units
 
     return mlcu
 
