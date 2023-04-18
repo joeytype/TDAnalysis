@@ -236,39 +236,22 @@ def results_syntax_tree_height_texts(array_of_texts):
 
 
 def calculate_mlcu(text):
-    # Tokenize text into sentences
-    sentences = nltk.sent_tokenize(text)
+    #this actually calculates the average number of clauses in the sentences in a text
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
 
-    # Iterate over sentences and tokenize into clause units
-    clause_units = []
-    for sentence in sentences:
-        # Tokenize sentence into words
-        words = nltk.word_tokenize(sentence)
+    num_sentences = 0
+    num_clauses = 0
 
-        # Iterate over words and group into clause units
-        clause_unit = []
-        for i, word in enumerate(words):
-            if i == 0:
-                clause_unit.append(word)
-            elif nltk.pos_tag([word])[0][1] in [',', ':', 'CC', 'IN']:
-                # Add punctuation and conjunctions to previous clause unit
-                clause_unit.append(word)
-            else:
-                # Start a new clause unit
-                clause_units.append(clause_unit)
-                clause_unit = [word]
+    for sentence in doc.sents:
+        num_sentences += 1
+        clause_count = 0
+        for token in sentence:
+            if token.dep_ in ['acl', 'advcl', 'ccomp', 'csubj', 'csubjpass']:
+                clause_count += 1
+        num_clauses += clause_count
 
-        # Add the last clause unit in the sentence
-        clause_units.append(clause_unit)
-
-    # Calculate the total number of clause units and the total number of words
-    num_clause_units = len(clause_units)
-    num_words = sum(len(clause_unit) for clause_unit in clause_units)
-
-    # Calculate the mean length of clause unit
-    mlcu = num_words / num_clause_units
-
-    return mlcu
+    return num_clauses / num_sentences
 
 def results_mlcu_texts(array_of_texts):
     results = []
