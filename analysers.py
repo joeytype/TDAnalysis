@@ -88,7 +88,7 @@ def ttr_of_text(text):
     # Tokenize filtered text into words and calculate TTR
     words = nltk.word_tokenize(filtered_text)
     unique_words = set(words)
-    ttr = len(unique_words) / len(words) if len(words) > 0 else 0
+    ttr = ld.ttr(filtered_text)
     return ttr
 
 
@@ -120,16 +120,22 @@ def results_mtld(array_of_texts):
 
 
 def yule(text):
-    # tokens = re.findall(r'\b(?![@#]|http)\w+\b', text.lower())
-    # freqs = Counter(tokens)
-    # freq_of_freqs = Counter(freqs.values())
-    # n = len(tokens)
-    # sum_squared_fof = sum([i * i * f for i, f in freq_of_freqs.items()])
-    # k = 10000 * (sum_squared_fof - n) / (n * n)
-    # return k
-    filtered_text = re.sub(r'\b[@#]\w+\b|\bhttps?\S+\b', '', text)
-    lex = LexicalRichness(filtered_text)
-    return lex.yulek
+
+    text = re.sub(r'@\S+|#\S+|https?\S+', '', text)
+
+    tokens = re.findall(r'\b\w+\b', text.lower())
+
+    freqs = Counter(tokens)
+
+    freq_of_freqs = Counter(freqs.values())
+
+    n = len(tokens)
+
+    sum_squared_fof = sum([i * i * f for i, f in freq_of_freqs.items()])
+
+    k = 10000 * (sum_squared_fof - n) / (n * n)
+    return k
+
 
 def results_yulesk_of_texts(array_of_texts):
     yulesk_values =[]
