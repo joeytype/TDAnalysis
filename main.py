@@ -62,18 +62,18 @@ if choice == "1":
     print("\n")
 
     # wfi
-    print("WFI tweets corpus:")
-    print(a.stats_of_results_array(a.results_wfi_of_texts(tweets)))
-    print("\n")
+    # print("WFI tweets corpus:")
+    # print(a.stats_of_results_array(a.results_wfi_of_texts(tweets)))
+    # print("\n")
     # print("WFI speeches corpus:")
     # print(a.stats_of_results_array(a.results_wfi_of_texts(speeches)))
     # print("\n")
     # print("WFI of questions corpus:")
     # print(a.stats_of_results_array(a.results_wfi_of_texts(questions)))
     # print("\n")
-    print("WFI dail as a whole:")
-    print(a.stats_of_results_array(a.results_wfi_of_texts(dail_utterances)))
-    print("\n")
+    # print("WFI dail as a whole:")
+    # print(a.stats_of_results_array(a.results_wfi_of_texts(dail_utterances)))
+    # print("\n")
     ##structural complexity
     print("***MEASURES OF STRUCTURAL COMPLEXITY***")
     print("\n")
@@ -120,18 +120,18 @@ if choice == "1":
     print("\n")
 
     # syntax tree height BROKEN RN LOL SORRY IT ALWAYS RETURNS NONE OOPSIES
-    print("syntax tree height tweets corpus:")
-    print(a.stats_of_results_array(a.results_syntax_tree_height_texts(tweets)))
-    print("\n")
+    # print("syntax tree height tweets corpus:")
+    # print(a.stats_of_results_array(a.results_syntax_tree_height_texts(tweets)))
+    # print("\n")
     # print("syntax tree height speeches corpus:")
     # print(a.stats_of_results_array(a.results_syntax_tree_height_texts(speeches)))
     # print("\n")
     # print("syntax tree height questions corpus:")
     # print(a.stats_of_results_array(a.results_syntax_tree_height_texts(questions)))
     # print("\n")
-    print("syntax tree height dail as a whole:")
-    print(a.stats_of_results_array(a.results_syntax_tree_height_texts(dail_utterances)))
-    print("\n")
+    #  print("syntax tree height dail as a whole:")
+     # print(a.stats_of_results_array(a.results_syntax_tree_height_texts(dail_utterances)))
+    # print("\n")
     ###
 
 else:
@@ -145,8 +145,8 @@ else:
     dail_yulesks = a.results_yulesk_of_texts(dail_utterances)
     twitter_yulesks = a.results_yulesk_of_texts(tweets)
 
-    dail_wfis = a.results_wfi_of_texts(dail_utterances)
-    twitter_wfis = a.results_wfi_of_texts(tweets)
+    # dail_wfis = a.results_wfi_of_texts(dail_utterances)
+    # twitter_wfis = a.results_wfi_of_texts(tweets)
 
     dail_sentencelengths = a.results_sentence_length_texts(dail_utterances)
     twitter_sentencelengths = a.results_sentence_length_texts(tweets)
@@ -168,8 +168,8 @@ else:
     print("\n Yule's K")
     s.kruskal_wallis_test(dail_yulesks, twitter_yulesks)
 
-    print("\n WFI")
-    s.kruskal_wallis_test(dail_wfis, twitter_wfis)
+    # print("\n WFI")
+    # s.kruskal_wallis_test(dail_wfis, twitter_wfis)
 
     print("\n Sentence Lengths")
     s.kruskal_wallis_test(dail_sentencelengths, twitter_sentencelengths)
