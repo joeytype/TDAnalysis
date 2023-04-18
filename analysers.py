@@ -77,23 +77,25 @@ def extract_csv_content(filename):
 
 import nltk
 
-def mean_ttr_of_text(text):
-    sentences = nltk.sent_tokenize(text)
-    tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
-    filtered_tokens = []
-    for sentence in tokens:
-        filtered_sentence = [token for token in sentence if not token.startswith(("http", "@", "#"))]
-        filtered_tokens.append(filtered_sentence)
-    ttrs = [len(set(token.lower() for token in sentence)) / len(sentence) for sentence in filtered_tokens if
-            len(sentence) > 0]
-    return sum(ttrs) / len(ttrs) if len(ttrs) > 0 else 0.0
+def ttr_of_text(text):
+    # Define regex pattern to match words starting with "@" or "http" or "#"
+    pattern = r"(^|\s)[@#]?http\S+|[@#]\S+"
+
+    # Remove words starting with "@" or "http" or "#" symbols from text
+    filtered_text = re.sub(pattern, "", text)
+
+    # Tokenize filtered text into words and calculate TTR
+    words = nltk.word_tokenize(filtered_text)
+    unique_words = set(words)
+    ttr = len(unique_words) / len(words) if len(words) > 0 else 0
+    return ttr
 
 
 def results_ttr(array_of_texts):
     # takes an array of tweets or speehces or smth idk
     ttrs = []
     for text in array_of_texts:
-         ttrs.append(mean_ttr_of_text(text))
+         ttrs.append(ttr_of_text(text))
     return ttrs
 
 
