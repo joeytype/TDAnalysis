@@ -10,7 +10,7 @@ tweets = a.read_tsv_column("TD_Darren O'Rourke_SocialMediaCorpus.tsv", 2)
 
 choice = input("Input 1 to get your measure results, 2 to get your stat test results")
 
-if choice == 1:
+if choice == "1":
     print(
         "These are calculated using the average for each entry in each corpus. For example the maximum sentence \n length is the maximum AVERAGE sentence length of an entry in that corpus")
     ###lexical complexity

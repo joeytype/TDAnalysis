@@ -100,13 +100,10 @@ def results_ttr(array_of_texts):
 def calculate_mtld(text):
 
     words = nltk.word_tokenize(text)
-
     words = [word for word in words if not (word.startswith("http") or word.startswith("@") or word.startswith("#"))]
-
     mtld_value = ld.mtld(words)
-
     return mtld_value
-
+    print(mtld_value)
 
 def results_mtld(array_of_texts):
     #takes an array of tweets or speehces or smth idk
