@@ -89,18 +89,18 @@ if choice == "1":
     print(a.stats_of_results_array(a.results_sentence_length_texts(dail_utterances)))
     print("\n")
 
-    # mlcu
-    print("MLCU tweets corpus:")
-    print(a.stats_of_results_array(a.results_mlcu_texts(tweets)))
+    # mean clauses
+    print("mean clauses tweets corpus:")
+    print(a.stats_of_results_array(a.results_mean_clauses_texts(tweets)))
     print("\n")
-    print("MLCU speeches corpus:")
-    print(a.stats_of_results_array(a.results_mlcu_texts(speeches)))
+    print("mean clauses speeches corpus:")
+    print(a.stats_of_results_array(a.results_mean_clauses_texts(speeches)))
     print("\n")
-    print("MLCU questions corpus:")
-    print(a.stats_of_results_array(a.results_mlcu_texts(questions)))
+    print("mean clauses questions corpus:")
+    print(a.stats_of_results_array(a.results_mean_clauses_texts(questions)))
     print("\n")
-    print("MLCU dail as a whole:")
-    print(a.stats_of_results_array(a.results_mlcu_texts(dail_utterances)))
+    print("mean clauses dail as a whole:")
+    print(a.stats_of_results_array(a.results_mean_clauses_texts(dail_utterances)))
     print("\n")
 
     # average number of embedded clauses
@@ -149,8 +149,8 @@ else:
     dail_sentencelengths = a.results_sentence_length_texts(dail_utterances)
     twitter_sentencelengths = a.results_sentence_length_texts(tweets)
 
-    dail_mlcus = a.results_mlcu_texts(dail_utterances)
-    twitter_mlcus = a.results_mlcu_texts(tweets)
+    dail_mean_clauses = a.results_mean_clauses_texts(dail_utterances)
+    twitter_mean_clauses = a.results_mean_clauses_texts(tweets)
 
     dail_embeddeds = a.get_results_embedded(dail_utterances)
     twitter_embeddeds = a.get_results_embedded(tweets)
@@ -172,8 +172,8 @@ else:
     print("\n Sentence Lengths")
     s.kruskal_wallis_test(dail_sentencelengths, twitter_sentencelengths)
 
-    print("\n MLCU")
-    s.kruskal_wallis_test(dail_mlcus, twitter_mlcus)
+    print("\n mean clauses")
+    s.kruskal_wallis_test(dail_mean_clauses, twitter_mean_clauses)
 
     print("\n Embedded Clauses")
     s.kruskal_wallis_test(dail_embeddeds, twitter_embeddeds)
@@ -194,8 +194,8 @@ else:
     print("\n Sentence Lengths")
     s.mann_whitney_u(dail_sentencelengths, twitter_sentencelengths)
 
-    print("\n MLCU")
-    s.mann_whitney_u(dail_mlcus, twitter_mlcus)
+    print("\n mean clauses")
+    s.mann_whitney_u(dail_mean_clauses, twitter_mean_clauses)
 
     print("\n Embedded Clauses")
     s.mann_whitney_u(dail_embeddeds, twitter_embeddeds)
@@ -217,8 +217,8 @@ else:
     print("\n Sentence Lengths")
     s.t_test(dail_sentencelengths, twitter_sentencelengths)
 
-    print("\n MLCU")
-    s.t_test(dail_mlcus, twitter_mlcus)
+    print("\n mean clauses")
+    s.t_test(dail_mean_clauses, twitter_mean_clauses)
 
     print("\n Embedded Clauses")
     s.t_test(dail_embeddeds, twitter_embeddeds)

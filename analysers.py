@@ -4,7 +4,6 @@ from collections import Counter
 import numpy as np
 import nltk
 from nltk.tree import Tree
-nltk.download('averaged_perceptron_tagger')
 import stanza
 import spacy
 import re
@@ -235,7 +234,7 @@ def results_syntax_tree_height_texts(array_of_texts):
     return results
 
 
-def calculate_mlcu(text):
+def calculate_mean_clauses(text):
     #this actually calculates the average number of clauses in the sentences in a text
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
@@ -253,10 +252,10 @@ def calculate_mlcu(text):
 
     return num_clauses / num_sentences
 
-def results_mlcu_texts(array_of_texts):
+def results_mean_clauses_texts(array_of_texts):
     results = []
     for text in array_of_texts:
-        result = calculate_mlcu(text)
+        result = calculate_mean_clauses(text)
         if result is not None:
             results.append(result)
 
